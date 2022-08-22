@@ -127,3 +127,134 @@ def game_hash
 end
 
 # Write code here
+
+#gets all team names
+
+# game_hash.each do |game, data|
+#   data.each do |attribute,value|
+#     # puts "#{attribute}: #{value}"
+#     if attribute ==:team_name
+#       puts data[:team_name]
+#     end
+#   end
+# end
+
+def num_points_scored player
+  game_hash.each do |game, data|
+    data.each do |attribute,value|
+      # puts "#{attribute}: #{value}"
+      if attribute == :players
+        value.each do |name|
+            if name[:player_name] == player
+              return name[:points]
+            end
+        end
+      end
+    end
+  end
+end
+
+# num_points_scored "Kemba Walker"
+
+def shoe_size player
+  game_hash.each do |game, data|
+    data.each do |attribute,value|
+      # puts "#{attribute}: #{value}"
+      if attribute == :players
+        value.each do |name|
+            if name[:player_name] == player
+              return name[:shoe]
+            end
+        end
+      end
+    end
+  end
+end
+
+def player_stats player
+  game_hash.each do |game, data|
+    data.each do |attribute,value|
+      # puts "#{attribute}: #{value}"
+      if attribute == :players
+        value.each do |name|
+            if name[:player_name] == player
+              return name
+            end
+        end
+      end
+    end
+  end
+end
+
+def team_colors team
+  game_hash.each do |game, data|
+    data.each do |attribute,value|
+
+      # puts "#{data[:colors]}"
+      if data[:team_name] == team
+             return data[:colors].to_a
+      end
+    end
+  end
+end
+
+# team_colors "Charlotte Hornets"
+
+def team_names
+  names =[]
+  game_hash.each do |game, data|
+    data.each do |attribute,value|
+      if data[:team_name] == value
+        names<<value
+      end
+    end
+  end
+  names
+end
+# puts team_names
+
+def player_numbers team
+  jersey=[]
+  game_hash.each do |game, data|
+    if data[:team_name] == team
+    data.each do |attribute,value|
+      if attribute == :players
+        value.each do |num|
+          jersey<<num[:number]
+            
+        end
+      end
+
+      # puts "#{attribute}: #{value}"
+    end
+    end
+  end
+   jersey
+end
+# player_numbers "Charlotte Hornets"
+
+
+
+
+def big_shoe_rebounds 
+  shoe_size=[]
+    game_hash.each do |game, data|
+      data.each do |attribute,value|
+        # puts "#{attribute}: #{value}"
+        if attribute == :players
+           value.each do |size| 
+             shoe_size<<size[:shoe]
+            end
+            value.each do |rebound| 
+              puts shoe_size.max
+            if rebound[:shoe]==shoe_size.max
+             return rebound[:rebounds]
+            end
+          end           
+        end
+      end
+    end
+
+end
+
+big_shoe_rebounds
